@@ -4,9 +4,12 @@ import axios from 'axios'
 
 import signinImage from '../assets/signup.jpg';
 
+const cookies = new Cookies();
+
 const initialState = {
   fullName: '',
   username: '',
+  password: '',
   confirmPassword: '',
   phoneNumber: '',
   avatarURL: '',
@@ -18,15 +21,36 @@ const Auth = () => {
 
   const handleChange =(e) => {
     setForm({ ... form, [e.target.name]: e.target.value});
+
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     console.log(form);
+    // const { fullName, username, password, phoneNumber, avatarURL} = form;
+
+    // const URL = 'http://localhost:5000/auth';
+    // const { data: { token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+    //   username, password, fullName, phoneNumber, avatarURL,
+    // })
+
+    // cookies.set('token', token);
+    // cookies.set('username', username);
+    // cookies.set('fullName', fullName);
+    // cookies.set('userId', userId);
+
+    // if(isSignup) {
+    //   cookies.set('phoneNumber', phoneNumber);
+    //   cookies.set('avatarURL', avatarURL);
+    //   cookies.set('hashedPassword', hashedPassword);
+    // }
+
+    // window.location.reload();
   }
 
   const switchMode = () => {
-    setIsSignup((prevIsSignup) => ! prevIsSignup);
+    setIsSignup((prevIsSignup) => !prevIsSignup);
   }
 
   return (
@@ -50,7 +74,7 @@ const Auth = () => {
             <div className='auth__form-container_fields-content_input'>
                 <label htmlFor='username'>Username</label>
                 <input 
-                  name='usename'
+                  name='username'
                   type='text'
                   placeholder='Username'
                   onChange={handleChange}
@@ -107,8 +131,7 @@ const Auth = () => {
                 <button>{isSignup ? "Sign Up" : "Sign In"}</button>
               </div>
           </form>
-          <div className='auth__form-container_fields-account'
-          >
+          <div className='auth__form-container_fields-account'>
             <p>
               {isSignup 
               ? "Already have account?" : "Don't have an account?"
