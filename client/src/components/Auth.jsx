@@ -24,29 +24,28 @@ const Auth = () => {
 
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(form);
-    // const { fullName, username, password, phoneNumber, avatarURL} = form;
+    const { fullName, username, password, phoneNumber, avatarURL} = form;
 
-    // const URL = 'http://localhost:5000/auth';
-    // const { data: { token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-    //   username, password, fullName, phoneNumber, avatarURL,
-    // })
+    const URL = 'http://localhost:5000/auth';
+    const { data: { token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+      username, password, fullName, phoneNumber, avatarURL,
+    })
 
-    // cookies.set('token', token);
-    // cookies.set('username', username);
-    // cookies.set('fullName', fullName);
-    // cookies.set('userId', userId);
+    cookies.set('token', token);
+    cookies.set('username', username);
+    cookies.set('fullName', fullName);
+    cookies.set('userId', userId);
 
-    // if(isSignup) {
-    //   cookies.set('phoneNumber', phoneNumber);
-    //   cookies.set('avatarURL', avatarURL);
-    //   cookies.set('hashedPassword', hashedPassword);
-    // }
+    if(isSignup) {
+      cookies.set('phoneNumber', phoneNumber);
+      cookies.set('avatarURL', avatarURL);
+      cookies.set('hashedPassword', hashedPassword);
+    }
 
-    // window.location.reload();
+    window.location.reload();
   }
 
   const switchMode = () => {
